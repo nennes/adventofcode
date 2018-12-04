@@ -1,7 +1,7 @@
 // url: https://adventofcode.com/2018/day/1
 const fs = require('fs')
 
-fs.readFile('./input.txt', 'utf8', (err, data) => {
+fs.readFile(`${__dirname}/input.txt`, 'utf8', (err, data) => {
   if (err) {
     return console.log(err);
   }

@@ -1,8 +1,6 @@
 // url: https://adventofcode.com/2018/day/3
 const fs = require('fs')
-
-const mapToValues = (map) =>
-  Array.from(map, ([key, value]) => value)
+const mapToValues = require('../../../utils/mapToValues')
 
 const getCoveredSquareIntchCoordinates = (claim) => {
   const claimRegExp = new RegExp('^#[0-9]+ @ ([0-9]+),([0-9]+): ([0-9]+)x([0-9]+)$')

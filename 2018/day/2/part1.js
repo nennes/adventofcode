@@ -1,5 +1,6 @@
 // url: https://adventofcode.com/2018/day/2
 const fs = require('fs')
+const mapToValues = require('../../../utils/mapToValues')
 
 const getLetterFrequency = (data) =>
   data
@@ -7,9 +8,6 @@ const getLetterFrequency = (data) =>
     .reduce(
       (freq, letter) => freq.set(letter, freq.has(letter) ? freq.get(letter) + 1 : 1)
       , new Map())
-
-const mapToValues = (map) =>
-  Array.from(map, ([key, value]) => value)
 
 fs.readFile(`${__dirname}/input.txt`, 'utf8', (err, data) => {
   if (err) {

@@ -1,33 +1,33 @@
 // url: https://adventofcode.com/2018/day/1
-const fs = require('fs')
+const getLines = require('../../../utils/getLines')
 
-fs.readFile(`${__dirname}/input.txt`, 'utf8', (err, data) => {
-  if (err) {
-    return console.log(err);
-  }
-
-  const inputArray = data
-    .split('\n')
-    .filter(line => line.length)
-    .map(Number)
-  const frequencies = new Map()
+const solver = (lines) => {
+  const linesToNumbers = lines.map(Number)
+  const frequencies = new Set([0])
 
   let freq = 0
   let solutionFound = false
+  let solution
 
   while(!solutionFound) {
-    freq = inputArray.reduce((sum, curr) => {
+    freq = linesToNumbers.reduce((sum, curr) => {
       if(solutionFound) {
         return null
       }
       const total = sum + curr
       if(frequencies.has(total)) {
-        console.log('Solution:', total)
+        solution = total
         solutionFound = true
       } else {
-        frequencies.set(total, null)
+        frequencies.add(total)
       }
       return total
     }, freq)
   }
-})
+  return solution
+}
+
+module.exports = {
+  solver,
+  answer: async() => solver(await getLines(`${__dirname}/input.txt`))
+}

@@ -1,16 +1,13 @@
 // url: https://adventofcode.com/2018/day/1
-const fs = require('fs')
+const getLines = require('../../../utils/getLines')
 
-fs.readFile(`${__dirname}/input.txt`, 'utf8', (err, data) => {
-  if (err) {
-    return console.log(err);
-  }
-
-  const sum = data
-    .split('\n')
-    .filter(line => line.length)
+const solver = (lines) => (
+  lines
     .map(Number)
     .reduce((total, current) => total + current, 0)
+)
 
-  console.log('Solution:', sum)
-})
+module.exports = {
+  solver,
+  answer: async() => solver(await getLines(`${__dirname}/input.txt`))
+}

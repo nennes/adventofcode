@@ -1,5 +1,5 @@
 // url: https://adventofcode.com/2018/day/2
-const fs = require('fs')
+const getLines = require('../../../utils/getLines')
 
 const commonLetters = (stringA, stringB) =>
   stringA
@@ -9,27 +9,21 @@ const commonLetters = (stringA, stringB) =>
 const uniqueIdPairs = (ids) => {
   const upperTriangleCoordinates = [...Array(ids.length - 1)]
     .map((_, rowIndex) => [...Array(ids.length - rowIndex - 1)]
-      .map((_, columnIndex) => [rowIndex, rowIndex + columnIndex + 1]))
+      .map((_, columnIndex) => [ids[rowIndex], ids[rowIndex + columnIndex + 1]]))
 
-  const flatComparisonIndices = [].concat(...upperTriangleCoordinates)
-
-  return flatComparisonIndices.map(([row, column]) => [ids[row], ids[column]])
+  return [].concat(...upperTriangleCoordinates)
 }
 
-fs.readFile(`${__dirname}/input.txt`, 'utf8', (err, data) => {
-  if (err) {
-    return console.log(err);
-  }
-
-  const boxIds = data
-    .split('\n')
-    .filter(line => line.length)
-
+const solver = (boxIds) => {
   for (let idPair of uniqueIdPairs(boxIds)) {
     const common = commonLetters(...idPair)
     if(common.length === idPair[0].length - 1) {
-      console.log('Solution:', common)
-      break;
+      return common
     }
   }
-})
+}
+
+module.exports = {
+  solver,
+  answer: async() => solver(await getLines(`${__dirname}/input.txt`))
+}

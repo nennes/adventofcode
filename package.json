@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/nennes/adventofcode#readme",
   "devDependencies": {
-    "jest": "^23.6.0"
+    "jest": "^23.6.0",
+    "lodash": "^4.17.11"
   }
 }

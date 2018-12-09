@@ -1,8 +1,10 @@
 const extractLogTextInfo = logText => {
-  if (logText.startsWith('Guard #')) {
+  const guardIdRegExp = new RegExp('^Guard #([0-9]+) begins shift$')
+  if (guardIdRegExp.test(logText)) {
+    const [_, guardId] = guardIdRegExp.exec(logText)
     return {
       type: 'SHIFT_START',
-      guardId: logText.substring(7, 9)
+      guardId: Number(guardId)
     }
   }
   if (logText === 'falls asleep') {
@@ -23,11 +25,9 @@ module.exports = line => {
     '^\\[([0-9]{4}\\-[0-9]{2}\\-[0-9]{2} [0-9]{2}:[0-9]{2})\\] (.*)$'
   )
   const [_, datetime, logText] = logRegExp.exec(line)
-  const timestamp = Date.parse(datetime)
-  const info = extractLogTextInfo(logText)
 
   return {
-    timestamp,
-    info
+    date: new Date(datetime),
+    ...extractLogTextInfo(logText)
   }
 }

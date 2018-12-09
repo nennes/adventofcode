@@ -37,23 +37,30 @@ const solver = logEntries => {
     }
   })
 
-  const sleepyGuard = [...sleepMap].reduce(
-    (mostSleepyGuard, [guardId, minutesSleeping]) => {
-      if (minutesSleeping.length > mostSleepyGuard.totalMinutesSleeping) {
-        mostSleepyGuard = {
-          guardId,
-          totalMinutesSleeping: minutesSleeping.length
-        }
+  const sleepyGuard = [...sleepMap]
+    .map(([guardId, minutesSleeping]) => {
+      const mostSleepyMinute = getMostCommonEntry(minutesSleeping)
+      return {
+        guardId,
+        minute: mostSleepyMinute.entry,
+        count: mostSleepyMinute.frequency
       }
-      return mostSleepyGuard
-    },
-    { totalMinutesSleeping: 0 }
-  )
+    })
+    .reduce(
+      (mostSleepyGuard, { guardId, minute, count }) => {
+        if (count > mostSleepyGuard.mostSleepyMinuteCount) {
+          mostSleepyGuard = {
+            guardId,
+            mostSleepyMinute: minute,
+            mostSleepyMinuteCount: count
+          }
+        }
+        return mostSleepyGuard
+      },
+      { mostSleepyMinuteCount: 0 }
+    )
 
-  return (
-    sleepyGuard.guardId *
-    getMostCommonEntry(sleepMap.get(sleepyGuard.guardId)).entry
-  )
+  return sleepyGuard.guardId * sleepyGuard.mostSleepyMinute
 }
 
 module.exports = {

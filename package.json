@@ -6,7 +6,8 @@
   "scripts": {
     "auto-fix-lint": "yarn lint --fix",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "prettier": "prettier --write 2018/**/*.js"
   },
   "repository": {
     "type": "git",
@@ -21,8 +22,12 @@
   "devDependencies": {
     "eslint": "^5.9.0",
     "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^3.3.0",
     "eslint-plugin-import": "^2.14.0",
-    "jest": "^23.6.0"
+    "eslint-plugin-prettier": "^3.0.0",
+    "jest": "^23.6.0",
+    "prettier": "^1.15.3",
+    "prettier-eslint": "^8.8.2"
   },
   "dependencies": {
     "lodash": "^4.17.11"

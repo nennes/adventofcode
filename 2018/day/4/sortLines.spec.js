@@ -44,7 +44,6 @@ describe('sortLines', () => {
       parseLine('[1518-11-05 00:45] falls asleep'),
       parseLine('[1518-11-05 00:55] wakes up')
     ]
-
     expect(sortLines(input)).toEqual(expectedOutput)
   })
 })

@@ -1,13 +1,13 @@
-const fs = require('fs');
-const { promisify } = require('util');
+const fs = require('fs')
+const { promisify } = require('util')
 
-const readFile = promisify(fs.readFile);
+const readFile = promisify(fs.readFile)
 
-module.exports = async (filePath) => {
+module.exports = async filePath => {
   try {
-    return await readFile(filePath, 'utf8');
+    return await readFile(filePath, 'utf8')
   } catch (e) {
-    console.error(e);
-    return null;
+    console.error(e)
+    return null
   }
-};
+}

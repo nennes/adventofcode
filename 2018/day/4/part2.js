@@ -1,4 +1,4 @@
-// url: https://adventofcode.com/2018/day/3
+// url: https://adventofcode.com/2018/day/4
 
 const getLines = require('../../../utils/getLines')
 const getMostCommonEntry = require('../../../utils/getMostCommonEntry')
